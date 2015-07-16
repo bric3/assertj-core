@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Entry point for assertion methods for different data types. Each method in this class is a static factory for the
@@ -101,6 +102,20 @@ public class Assertions extends StrictAssertions {
    */
   public static <T> AbstractIterableAssert<?, ? extends Iterable<? extends T>, T> assertThat(Iterator<? extends T> actual) {
     return new IterableAssert<>(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link IterableAssert}</code>.
+   * <p/>
+   * <b>Be aware that calls to most methods on returned IterableAssert will consume Iterator so it won't be possible to
+   * iterate over it again.</b> Calling multiple methods on returned IterableAssert is safe as Iterator's elements are
+   * cached by IterableAssert first time Iterator is consumed.
+   *
+   * @param actual the actual value.
+   * @return the created assertion object.
+   */
+  public static <T> AbstractStreamAssert<?, ? extends Stream<? extends T>, T> assertThat(Stream<? extends T> actual) {
+    return new StreamAssert<>(actual);
   }
 
   /**
