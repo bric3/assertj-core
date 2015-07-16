@@ -14,17 +14,15 @@ package org.assertj.core.api;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Sets.newLinkedHashSet;
+import static org.assertj.core.util.Lists.newArrayList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyZeroInteractions;
-
 import java.util.Iterator;
-
 import org.junit.Test;
 
 /**
  * Tests for <code>{@link Assertions#assertThat(Iterator)}</code>.
- * 
+ *
  * @author Julien Meddah
  * @author Joel Costigliola
  * @author Mikhail Mazursky
@@ -33,8 +31,8 @@ public class Assertions_assertThat_with_Iterator_Test {
 
   @Test
   public void should_create_Assert() {
-    Object assertions = Assertions.assertThat(newLinkedHashSet());
-	assertThat(assertions).isNotNull();
+    Object assertions = (IterableAssert) assertThat(newArrayList().iterator());
+    assertThat(assertions).isNotNull();
   }
 
   @SuppressWarnings("unchecked")
